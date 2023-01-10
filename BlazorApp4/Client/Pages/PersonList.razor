@@ -1,0 +1,31 @@
+﻿@page "/personlist"
+@using BlazorApp4.Client.Interfaces;
+@inject HttpClient Http;
+@inject IPersonService PersonService;
+
+<h3>Person List</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var man in PersonService.persons)
+        {
+            <tr>
+                <td>@man.Id</td>
+                <td>@man.name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await PersonService.GetPerson();
+    }
+}

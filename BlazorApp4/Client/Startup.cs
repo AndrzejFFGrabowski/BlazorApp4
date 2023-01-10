@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using BlazorApp4.Client.Interfaces;
+using BlazorApp4.Client.Services;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace BlazorApp4.Client
@@ -16,6 +18,7 @@ namespace BlazorApp4.Client
         {
             //    builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped<IPersonService, PersonService>();
         }
 
         private static void Configure(WebAssemblyHostBuilder builder)

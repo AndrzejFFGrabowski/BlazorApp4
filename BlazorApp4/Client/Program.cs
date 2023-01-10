@@ -1,7 +1,6 @@
 using BlazorApp4.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-
 namespace BlazorApp4.Client
 {
     public class Program

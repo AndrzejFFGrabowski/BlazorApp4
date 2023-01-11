@@ -108,6 +108,19 @@
                     alert('Error: ' + err);
                 });
         }
+        function getLocation() {
+            const successCallback = (position) => {
+                var lat = position.coords.latitude;
+                var log = position.coords.longitude;
+                alert(lat + ' , ' + log);
+            };
+            const errorCallback = (error) => {
+                alert(error);
+            };
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        }
+
+
     </script>
 
 

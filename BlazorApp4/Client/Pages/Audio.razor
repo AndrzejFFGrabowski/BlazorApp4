@@ -18,6 +18,12 @@
   </div>
 </div>
 
+<div>
+    <button class="btn btn-primary" @onclick="getMyLocation">location</button>
+</div>
+
+
+
 @code {
 
     public async void getAudio()
@@ -28,4 +34,9 @@
     {
         await JS.InvokeVoidAsync("getMedia","video");
     }
+    public async void getMyLocation()
+    {
+        await JS.InvokeVoidAsync("getLocation");
+    }
+
 }

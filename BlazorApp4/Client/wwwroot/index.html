@@ -12,6 +12,30 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <script>navigator.serviceWorker.register('service-worker.js');
+
+        window.editNotify = (id) => {
+            if (!("Notification" in window)) {
+                alert("This browser does not support desktop notification");
+            } else if (Notification.permission === "granted") {
+                const notification = new Notification("User edited");
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === "granted") {
+                        const notification = new Notification("User edited");
+                    }
+                });
+            }
+        };
+
+        function func() {
+            console.log("func")
+        }
+
+
+    </script>
+
+
 </head>
 
 <body>
@@ -24,6 +48,8 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+
+
 </body>
 
-</html>
+</html >

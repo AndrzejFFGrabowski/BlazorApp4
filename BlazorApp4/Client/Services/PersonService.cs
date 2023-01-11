@@ -23,5 +23,19 @@ namespace BlazorApp4.Client.Services
         {
             var result = await _http.PostAsJsonAsync<Person>(uri, person);
         }
+        public async Task EditPerson(Person person)
+        {
+            var result = await _http.PutAsJsonAsync<Person>(uri, person);
+        }
+
+        public async Task DeletePerson(int id)
+        {
+            var result = await _http.DeleteAsync(uri + "/" + id.ToString());
+        }
+
+        public Task GetSinglePerson(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,47 @@
+﻿@page "/personedit"
+@using BlazorApp4.Client.Interfaces;
+@using BlazorApp4.Shared
+@inject HttpClient Http;
+@inject IPersonService PersonService;
+@inject IJSRuntime JS
+
+<h3>PersonEdit</h3>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Enter Id" @bind="@idString" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Enter name" @bind="@nameString" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <button @onclick="editPerson" class="btn btn-light">submit</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string idString = "";
+    private string nameString = "";
+    private int id;
+
+    private async void editPerson()
+    {
+        if (int.TryParse(idString, out id))
+        {
+            if (nameString != "")
+            {
+                Person person = new Person(id, nameString);
+                PersonService.EditPerson(person);
+            }
+        }
+        await JS.InvokeVoidAsync("editNotify", id);
+    }
+}

@@ -27,14 +27,21 @@
                 });
             }
         };
-        window.getOnlineState = () => {
-            if (navigator.onLine) {
-                return "online";
-            } else {
-                return "offline";
-            }
 
-        };
+        function battery() {
+            if (navigator.getBattery) {
+                navigator.getBattery()
+                    .then(function (battery) {
+
+                        // Get current battery level .
+                        var batteryLevel = battery.level * 100;
+                        alert(batteryLevel);
+                    })
+                    .catch(function (e) {
+                        alert(e);
+                    });
+            }
+        }
 
         window.getUSB = () => {
             navigator.usb.getDevices()

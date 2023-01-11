@@ -5,9 +5,6 @@
 
 <h3>Device</h3>
 
-<p role="status">Online: @state</p>
-
-<button class="btn btn-primary" @onclick="CheckOnClick">Status:</button>
 
 <button class="btn btn-primary" @onclick="FullScreen">full screen:</button>
 
@@ -16,17 +13,16 @@
 
 <button class="btn btn-primary" @onclick="GetUsb">usb</button>
 
+<button class="btn btn-primary" @onclick="GetBatteryLevel">battery</button>
+
+
 <InputFile OnChange="@GetFile" multiple />
 <p role="status">Current File: @strFile</p>
 
 @code {
     String strFile = "no file";
     String state;
-    public async void CheckOnClick()
-    {
-        state = new(await JS.InvokeAsync<string>("getOnlineState"));
-        //state = state + state;
-    }
+
     public async Task FullScreen()
     {
         await JS.InvokeVoidAsync("fullSreen");
@@ -49,4 +45,10 @@
     {
         await JS.InvokeVoidAsync("getUSB");
     }
+    public async Task GetBatteryLevel()
+    {
+        await JS.InvokeVoidAsync("battery");
+    }
+
+          
 }

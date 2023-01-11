@@ -27,12 +27,87 @@
                 });
             }
         };
+        window.getOnlineState = () => {
+            if (navigator.onLine) {
+                return "online";
+            } else {
+                return "offline";
+            }
 
-        function func() {
-            console.log("func")
+        };
+
+        window.getUSB = () => {
+            navigator.usb.getDevices()
+                .then((devices) => {
+                    console.log(`Total devices: ${devices.length}`);
+                    alert(`Total devices: ${devices.length}`)
+                    devices.forEach((device) => {
+                        console.log(`Product name: ${device.productName}, serial number ${device.serialNumber}`);
+                        alert(`Product name: ${device.productName}, serial number ${device.serialNumber}`)
+                    });
+                });
         }
 
+        function fullSreen() {
 
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+
+        };
+
+        function copy() {
+            var copyText = document.getElementById("myInput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+        }
+
+        function getUserMedia(constraints) {
+            if (navigator.mediaDevices) {
+                return navigator.mediaDevices.getUserMedia(constraints);
+            }
+
+            var legacyApi = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+            if (legacyApi) {
+                return new Promise(function (resolve, reject) {
+                    legacyApi.bind(navigator)(constraints, resolve, reject);
+                });
+            }
+        }
+
+        function getMedia(type) {
+            if (!navigator.mediaDevices && !navigator.getUserMedia && !navigator.webkitGetUserMedia &&
+                !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
+                alert('User Media API not supported.');
+                return;
+            }
+
+            var constraints = {};
+            constraints[type] = true;
+
+            getUserMedia(constraints)
+                .then(function (stream) {
+                    var mediaControl = document.querySelector(type);
+
+                    if ('srcObject' in mediaControl) {
+                        mediaControl.srcObject = stream;
+                    } else if (navigator.mozGetUserMedia) {
+                        mediaControl.mozSrcObject = stream;
+                    } else {
+                        mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+                    }
+
+                    mediaControl.play();
+                })
+                .catch(function (err) {
+                    alert('Error: ' + err);
+                });
+        }
     </script>
 
 

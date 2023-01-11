@@ -1,0 +1,31 @@
+﻿@page "/Audio"
+@inject IJSRuntime JS
+@using Microsoft.Extensions.Logging
+@using System.IO
+
+<h3>audio</h3>
+
+<div class="columns">
+  <div class="column">
+    <p><button type="button" onclick="@getVideo">Grab video</button></p>
+    
+    <video controls autoplay style="height:180px; width: 240px;"></video>
+  </div>
+  <div class="column">
+    <p><button type="button" onclick="@getAudio">Grab audio</button></p>
+    
+    <audio controls></audio>
+  </div>
+</div>
+
+@code {
+
+    public async void getAudio()
+    {
+        await JS.InvokeVoidAsync("getMedia","audio");
+    }
+    public async void getVideo()
+    {
+        await JS.InvokeVoidAsync("getMedia","video");
+    }
+}

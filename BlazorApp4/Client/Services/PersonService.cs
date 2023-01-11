@@ -12,7 +12,7 @@ namespace BlazorApp4.Client.Services
             _http = http;
         }
         public List<Person> persons { get; set; } = new List<Person>();
-        private const string uri = "https://localhost:7011/api/Person";
+        private const string uri = "api/Person";
         public async Task GetPerson()
         {
             var result = await _http.GetFromJsonAsync<List<Person>>(uri);

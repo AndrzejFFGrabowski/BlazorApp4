@@ -6,7 +6,7 @@ namespace BlazorApp4.Server.Tools
 {
     public class Database
     {
-        static string filePath = "C:/test.json";
+        static string filePath = "data.json";
         public static async Task WriteTextAsync(List<Person> persons)
         {
 

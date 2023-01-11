@@ -6,5 +6,6 @@ namespace BlazorApp4.Client.Interfaces
     {
         List<Person> persons { get; set; }
         Task GetPerson();
+        Task AddPerson(Person person);
     }
 }

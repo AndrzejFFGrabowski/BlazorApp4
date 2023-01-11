@@ -1,0 +1,51 @@
+﻿@page "/personadd"
+@using BlazorApp4.Client.Interfaces;
+@using BlazorApp4.Shared
+@inject HttpClient Http;
+@inject IPersonService PersonService;
+<h3>PersonAdd</h3>
+
+<PageTitle>Create new Person</PageTitle>
+
+<div>
+    <div class="row">
+    
+        <div class="col-md-4">
+            <input placeholder="Enter Id" @bind="@idString" /> 
+        </div>
+        Id
+    </div>
+    <br />
+    
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Enter name" @bind="@nameString" /> 
+        </div>
+        Name
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <button @onclick="addPerson" class="btn btn-light">submit</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string idString = "";
+    private string nameString = "";
+    private int id;
+
+    private void addPerson()
+    {
+        if (int.TryParse(idString, out id))
+        {
+            if (nameString != "")
+            {
+                Person person = new Person(id, nameString);
+                PersonService.AddPerson(person);
+            }
+        }
+
+    }
+}

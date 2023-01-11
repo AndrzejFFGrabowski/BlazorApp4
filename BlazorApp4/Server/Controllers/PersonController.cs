@@ -31,5 +31,20 @@ namespace BlazorApp4.Server.Controllers
             
             return Ok(persons);
         }
+        [HttpPost]
+        public async Task<ActionResult> AddPerson(Person person)
+        {
+            //var result = await _http.GetFromJsonAsync<List<Person>>("C:\\data.json");
+            persons = await Database.ReadTextAsync();
+            Person x = persons.Find(p => p.Id == person.Id);
+            if (x != null)
+            {
+                return StatusCode(409);
+            }
+            persons.Add(person);
+            await Database.WriteTextAsync(persons);
+            Console.WriteLine("tada");
+            return Ok();
+        }
     }
 }

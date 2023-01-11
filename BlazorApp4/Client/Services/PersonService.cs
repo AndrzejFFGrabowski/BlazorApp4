@@ -19,5 +19,9 @@ namespace BlazorApp4.Client.Services
             if (result != null)
                 persons = result;
         }
+        public async Task AddPerson(Person person)
+        {
+            var result = await _http.PostAsJsonAsync<Person>(uri, person);
+        }
     }
 }

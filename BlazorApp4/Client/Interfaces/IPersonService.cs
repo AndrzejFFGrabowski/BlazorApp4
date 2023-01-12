@@ -8,7 +8,6 @@ namespace BlazorApp4.Client.Interfaces
         Task GetPerson();
         Task AddPerson(Person person);
         Task EditPerson(Person person);
-        Task GetSinglePerson(int id);
         Task DeletePerson(int id);
     }
 }

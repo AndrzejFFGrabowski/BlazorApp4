@@ -77,15 +77,5 @@ namespace BlazorApp4.Server.Controllers
             return Ok();
 
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<Person>>> GetPerson(int id)
-        {
-            var someone = persons.FirstOrDefault(h => h.Id == id);
-            if (someone == null)
-            {
-                return NotFound("No person:/");
-            }
-            return Ok(persons);
-        }
     }
 }

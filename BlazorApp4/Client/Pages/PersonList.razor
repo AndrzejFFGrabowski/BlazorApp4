@@ -5,6 +5,14 @@
 
 <h3>Person List</h3>
 
+<div class="row">
+    <div class="col-md-4">
+    Put id:   <input placeholder="" @bind="@idString" />
+    </div>
+</div>
+
+
+
 <table class="table">
     <thead>
     <tr>
@@ -15,15 +23,32 @@
     <tbody>
         @foreach (var man in PersonService.persons)
         {
-            <tr>
-                <td>@man.Id</td>
-                <td>@man.name</td>
-            </tr>
+            @if (int.TryParse(idString, out id))
+            {
+                @if (man.Id == id)
+                {
+                    <tr>
+                        <td>@man.Id</td>
+                        <td>@man.name</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>@man.Id</td>
+                    <td>@man.name</td>
+                </tr>
+            }
+
         }
     </tbody>
 </table>
 
 @code {
+    private string idString;
+    private int id;
+    Boolean searchingInProgress = false;
     protected override async Task OnInitializedAsync()
     {
         await PersonService.GetPerson();

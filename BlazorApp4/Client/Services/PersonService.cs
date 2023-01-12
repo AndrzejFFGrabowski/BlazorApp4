@@ -33,9 +33,5 @@ namespace BlazorApp4.Client.Services
             var result = await _http.DeleteAsync(uri + "/" + id.ToString());
         }
 
-        public Task GetSinglePerson(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

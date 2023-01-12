@@ -37,7 +37,8 @@ namespace BlazorApp4.Server
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
             app.UseRouting();

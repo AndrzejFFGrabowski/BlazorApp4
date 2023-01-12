@@ -12,6 +12,7 @@ namespace BlazorApp4.Client.Services
             _http = http;
         }
         public List<Person> persons { get; set; } = new List<Person>();
+        public Person person { get; set; } = new Person(0, "");
         private const string uri = "api/Person";
         public async Task GetPerson()
         {
@@ -33,9 +34,17 @@ namespace BlazorApp4.Client.Services
             var result = await _http.DeleteAsync(uri + "/" + id.ToString());
         }
 
-        public Task GetSinglePerson(int id)
+        public async Task GetSinglePerson(int id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("service 0");
+            var result = await _http.GetFromJsonAsync<Person>("api/Person/{id}");
+            Console.WriteLine("service 1");
+            if (result != null)
+            {
+                person = result;
+                Console.WriteLine("service ", result);
+            }
+
         }
     }
 }

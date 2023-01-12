@@ -9,12 +9,6 @@ namespace BlazorApp4.Server.Controllers
     public class PersonController : ControllerBase
     {
         public static List<Person> persons = new List<Person>();
-        /*
-        {
-            new Person { Id = 1,name="na"}
-            ,new Person { Id = 2,name="me"}
-        };
-        */
 
         public PersonController()
         {
@@ -78,12 +72,14 @@ namespace BlazorApp4.Server.Controllers
 
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Person>>> GetPerson(int id)
+        public async Task<ActionResult<Person>>GetPerson(int id)
         {
             var someone = persons.FirstOrDefault(h => h.Id == id);
+            Console.WriteLine("controller");
             if (someone == null)
             {
                 return NotFound("No person:/");
+                Console.WriteLine("null contro");
             }
             return Ok(persons);
         }

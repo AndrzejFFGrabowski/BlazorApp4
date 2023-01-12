@@ -1,6 +1,8 @@
 ﻿using BlazorApp4.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Authentication;
 
 namespace BlazorApp4.Server
 {
@@ -17,6 +19,7 @@ namespace BlazorApp4.Server
         }
         private static void ConfigureServices(WebApplicationBuilder builder)
         {
+            
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
         }

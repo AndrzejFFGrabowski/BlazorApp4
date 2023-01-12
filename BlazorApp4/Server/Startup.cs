@@ -1,4 +1,5 @@
 ﻿using BlazorApp4.Client;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -17,6 +18,7 @@ namespace BlazorApp4.Server
         }
         private static void ConfigureServices(WebApplicationBuilder builder)
         {
+            builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
         }
